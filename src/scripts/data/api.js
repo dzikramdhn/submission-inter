@@ -3,8 +3,9 @@ import AuthHelper from '../utils/auth-helper'; // pastikan sudah ada modul ini
 
 const ENDPOINTS = {
   SUBSCRIBE: `${BASE_URL}/push/web/subscribe`,
-  UNSUBSCRIBE: `${BASE_URL}/push/web/subscribe`,
+  UNSUBSCRIBE: `${BASE_URL}/push/web/unsubscribe`,
 };
+
 
 export async function subscribePushNotification({ endpoint, keys }) {
   const accessToken = AuthHelper.getToken?.();
