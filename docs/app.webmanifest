@@ -1,0 +1,13 @@
+{
+  "name": "StoryApp",
+  "short_name": "StoryApp",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#164863",
+  "theme_color": "#164863",
+  "description": "Aplikasi berbagi cerita PWA + Push + IndexedDB",
+  "icons": [
+    { "src": "images/logo.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "images/logo.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
