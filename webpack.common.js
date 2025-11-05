@@ -10,16 +10,27 @@ module.exports = {
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    clean: true, // auto bersihkan dist setiap build
+    clean: true, 
   },
   module: {
     rules: [
-      { test: /\.(png|jpe?g|gif|svg)$/i, type: 'asset/resource' },
-      { test: /\.css$/i, use: ['style-loader', 'css-loader'] },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: { loader: 'babel-loader', options: { presets: [['@babel/preset-env',{targets:'defaults'}]] } },
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [['@babel/preset-env', { targets: 'defaults' }]],
+          },
+        },
       },
     ],
   },
@@ -29,23 +40,18 @@ module.exports = {
       filename: 'index.html',
     }),
     new CopyWebpackPlugin({
-      patterns: [{ from: path.resolve(__dirname, 'src/public/'), to: path.resolve(__dirname, 'dist/') }],
-    }),
-    new WorkboxWebpackPlugin.GenerateSW({
-      clientsClaim: true,
-      skipWaiting: true,
-      runtimeCaching: [
+      patterns: [
         {
-          urlPattern: /^https:\/\/story-api\.dicoding\.dev\/v1\//,
-          handler: 'NetworkFirst',
-          options: { cacheName: 'story-api-cache' },
-        },
-        {
-          urlPattern: /\.(?:png|jpg|jpeg|svg|gif)$/,
-          handler: 'CacheFirst',
-          options: { cacheName: 'image-cache', expiration: { maxEntries: 50, maxAgeSeconds: 30*24*60*60 } },
+          from: path.resolve(__dirname, 'src/scripts/'),
+          to: path.resolve(__dirname, 'dist/'),
         },
       ],
+    }),
+   
+    new WorkboxWebpackPlugin.InjectManifest({
+      swSrc: path.resolve(__dirname, 'src/scripts/sw.js'), 
+      swDest: 'service-worker.js',                        
+      maximumFileSizeToCacheInBytes: 8 * 1024 * 1024,     
     }),
   ],
 };

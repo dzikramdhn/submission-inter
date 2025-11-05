@@ -13,7 +13,7 @@ class App {
     this.#navigationDrawer = navigationDrawer;
 
     this._setupDrawer();
-    this._updateNavbarVisibility(); 
+    this._updateNavbarVisibility();
   }
 
   _setupDrawer() {
@@ -37,26 +37,30 @@ class App {
     });
   }
 
-  
   async renderPage() {
-    const token = localStorage.getItem('token'); 
+    const token = localStorage.getItem('token');
     const url = getActiveRoute();
 
     
-    if (!token && url !== '/login' && url !== '/register') {
+    const publicRoutes = ['/login', '/register']; 
+    if (!token && !publicRoutes.includes(url)) {
       window.location.hash = '#/login';
       return;
     }
 
-    const page = routes[url] || routes['/']; 
-    this.#content.innerHTML = await page.render();
-    await page.afterRender();
+    
+    const page = routes[url] || routes['/'];
 
-    this._setupLogout(); 
-    this._updateNavbarVisibility(); 
+    
+    await applyViewTransition(async () => {
+      this.#content.innerHTML = await page.render();
+      await page.afterRender();
+    });
+
+    this._setupLogout();
+    this._updateNavbarVisibility();
   }
 
-  
   _updateNavbarVisibility() {
     const token = localStorage.getItem('token');
     const nav = this.#navigationDrawer;
@@ -71,7 +75,6 @@ class App {
     }
   }
 
- 
   _setupLogout() {
     const logoutButton = document.querySelector('#logout-button');
     if (logoutButton) {

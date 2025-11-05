@@ -250,6 +250,152 @@ header {
   transform: scale(1.05);
 }
 
+/* ================================
+   Cerita Tersimpan (Bookmark Page)
+================================= */
+
+.bookmark-page {
+  padding: 2rem 1rem;
+  text-align: center;
+  animation: fadeIn 0.4s ease;
+}
+
+.bookmark-page h2 {
+  color: var(--primary);
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+/* daftar story disimpan offline, sama layout-nya kayak beranda */
+#saved-stories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* setiap card offline */
+.story-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.story-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.15);
+}
+
+.story-card img.story-thumb {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.story-card .story-info {
+  padding: 1rem;
+  text-align: left;
+}
+
+/* tombol “lihat detail” */
+.story-card .btn-detail {
+  display: inline-block;
+  background-color: var(--secondary);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.25s, transform 0.15s;
+}
+
+.story-card .btn-detail:hover {
+  background-color: var(--primary);
+  transform: scale(1.05);
+}
+
+/* tombol hapus kecil di kanan atas */
+.btn-remove {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  border: none;
+  background-color: #dc3545;
+  color: #fff;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  padding: 3px 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn-remove:hover {
+  background-color: #b52a37;
+}
+
+/* pesan kosong */
+.empty-message {
+  color: var(--secondary);
+  font-weight: 600;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.detail-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 1rem;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.btn-danger {
+  background-color: #c62828;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.btn-danger:hover {
+  background-color: #b71c1c;
+}
+
+.btn-back {
+  background-color: var(--secondary);
+  color: white;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.btn-back:hover {
+  background-color: var(--primary);
+}
+
+
 /* add story */
 .add-form-container {
   max-width: 600px;

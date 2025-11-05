@@ -28,7 +28,7 @@ class AboutPage {
   }
 
   async afterRender() {
-    // Tidak perlu event tambahan untuk halaman statis
+    
   }
 }
 

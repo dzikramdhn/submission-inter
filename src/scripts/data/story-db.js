@@ -1,22 +1,20 @@
 import { openDB } from 'idb';
 
-const DATABASE_NAME = 'storyapp-db';
-const DATABASE_VERSION = 1;
-const OBJECT_STORE_NAME = 'saved-stories';
+const DB_NAME = 'storyapp-db';
+const DB_VERSION = 1;
+const STORE = 'saved-stories';
 
-const dbPromise = openDB(DATABASE_NAME, DATABASE_VERSION, {
-  upgrade(database) {
-    if (!database.objectStoreNames.contains(OBJECT_STORE_NAME)) {
-      database.createObjectStore(OBJECT_STORE_NAME, { keyPath: 'id' });
-    }
+const dbPromise = openDB(DB_NAME, DB_VERSION, {
+  upgrade(db) {
+    if (!db.objectStoreNames.contains(STORE)) db.createObjectStore(STORE, { keyPath: 'id' });
   },
 });
 
 const StoryDB = {
-  async getAllStories() { return (await dbPromise).getAll(OBJECT_STORE_NAME); },
-  async getStoryById(id) { return (await dbPromise).get(OBJECT_STORE_NAME, id); },
-  async putStory(story) { return (await dbPromise).put(OBJECT_STORE_NAME, story); },
-  async deleteStory(id) { return (await dbPromise).delete(OBJECT_STORE_NAME, id); },
+  getAll: async () => (await dbPromise).getAll(STORE),
+  get: async (id) => (await dbPromise).get(STORE, id),
+  put: async (story) => (await dbPromise).put(STORE, story),
+  delete: async (id) => (await dbPromise).delete(STORE, id),
 };
 
 export default StoryDB;
